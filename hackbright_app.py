@@ -11,6 +11,12 @@ def get_student_by_github(github):
 #Student: %s %s
 #Github account: %s"""%(row[0], row[1], row[2])
 
+def get_student_grades(github):
+    query = """SELECT project_title, grade FROM grades WHERE student_github = ?"""
+    DB.execute(query, (github,))
+    row = DB.fetchone()
+    return row
+
 def make_new_student(first_name,last_name,github):
     query = """INSERT into Students values(?,?,?)"""
     DB.execute(query,(first_name, last_name, github))
